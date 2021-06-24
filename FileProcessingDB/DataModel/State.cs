@@ -6,7 +6,7 @@ namespace FileProcessingDB.DataModel
 {
 	public class State
 	{
-		public int ID { get; set; }
+		public int IDSt { get; set; }
 		public string Name { get; set; }
 
 		public List<BaseRate> baserates { get; set; }

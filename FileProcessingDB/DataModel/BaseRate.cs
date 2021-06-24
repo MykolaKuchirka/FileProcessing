@@ -10,13 +10,18 @@ namespace FileProcessingDB.DataModel
 		public float Value { get; set; }
 		public DateTime LastModified { get; set; }
 		public int TotalTerm { get; set; }
-
-		public Advertiser Advertiser { get; set; }
-		public Amount Amount { get; set; }
-		public CreditScore CreditScore { get; set; }
-		public ltv ltv { get; set; }
-		public ProductType ProductType { get; set; }
-		public State State { get; set; }
+		public int IDAdv { get; set; }
+		public int IDAm { get; set; }
+		public int IDCr { get; set; }
+		public int IDl { get; set; }
+		public int IDPr { get; set; }
+		public int IDSt { get; set; }
+		public virtual Advertiser Advertiser { get; set; }
+		public virtual Amount Amount { get; set; }
+		public virtual CreditScore CreditScore { get; set; }
+		public virtual ltv ltv { get; set; }
+		public virtual ProductType ProductType { get; set; }
+		public virtual State State { get; set; }
 
 	}
 }
