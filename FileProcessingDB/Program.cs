@@ -7,8 +7,8 @@ namespace FileProcessingDB
 	{
 		static void Main(string[] args)
 		{
-			FileProcessingDBContext DBCont = new FileProcessingDBContext();
 			
+
 			Console.WriteLine("Hello World!");
 		}
 	}

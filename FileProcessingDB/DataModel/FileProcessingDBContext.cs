@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FileProcessingDB.DataModel
 {
-	internal class FileProcessingDBContext : DbContext
+	public class FileProcessingDBContext : DbContext
 	{
 		public FileProcessingDBContext() 
 		{
@@ -23,7 +23,7 @@ namespace FileProcessingDB.DataModel
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;");
+			optionsBuilder.UseSqlServer(@"Server=DESKTOP-0SG1T74;Database=FileProcessing;Trusted_Connection=True;");
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
