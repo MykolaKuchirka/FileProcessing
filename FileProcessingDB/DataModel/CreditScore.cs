@@ -6,7 +6,7 @@ namespace FileProcessingDB.DataModel
 {
 	public class CreditScore
 	{
-		public int IDCr { get; set; }
+		public int Id { get; set; }
 		public int min { get; set; }
 		public int max { get; set; }
 

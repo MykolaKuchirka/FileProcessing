@@ -6,7 +6,7 @@ namespace FileProcessingDB.DataModel
 {
 	public  class ltv
 	{
-		public int IDl { get; set; }
+		public int Id { get; set; }
 		public float min { get; set; }
 		public float max { get; set; }
 

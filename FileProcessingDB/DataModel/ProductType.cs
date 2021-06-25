@@ -6,7 +6,7 @@ namespace FileProcessingDB.DataModel
 {
 	public class ProductType
 	{
-		public int IDPr { get; set; }
+		public int Id { get; set; }
 		public string Name { get; set; }
 
 		public List<BaseRate> baserates { get; set; }

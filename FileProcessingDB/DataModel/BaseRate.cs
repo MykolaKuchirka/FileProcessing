@@ -6,7 +6,7 @@ namespace FileProcessingDB.DataModel
 {
 	public class BaseRate
 	{
-		public int ID { get; set; }
+		public int Id { get; set; }
 		public float Value { get; set; }
 		public DateTime LastModified { get; set; }
 		public int TotalTerm { get; set; }

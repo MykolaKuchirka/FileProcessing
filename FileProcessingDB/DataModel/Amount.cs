@@ -6,7 +6,7 @@ namespace FileProcessingDB.DataModel
 {
 	public class Amount
 	{
-		public int IDAm { get; set; }
+		public int Id { get; set; }
 		public float min { get; set; }
 		public float max { get; set; }
 
