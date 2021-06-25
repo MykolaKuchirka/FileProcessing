@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using FileProcessingDB.DataModel;
 
 namespace FileProcessingDB.DataModel
 {

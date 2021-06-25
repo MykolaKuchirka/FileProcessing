@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.EntityFrameworkCore.Design;
 using FileProcessingDB.DataModel;
 
 namespace FileProcessing.API
@@ -20,6 +20,7 @@ namespace FileProcessing.API
 	{
 		public Startup(IConfiguration configuration)
 		{
+			FileProcessingDBContext DBCont = new FileProcessingDBContext();
 			Configuration = configuration;
 		}
 
@@ -32,6 +33,7 @@ namespace FileProcessing.API
 				 //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 			services.AddControllersWithViews();
+			services.AddDbContext<FileProcessingDBContext>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -14,7 +14,7 @@ namespace FileProcessing.API
 	{
 		public static void Main(string[] args)
 		{
-			FileProcessingDBContext DBCont = new FileProcessingDBContext();
+			
 			CreateHostBuilder(args).Build().Run();
 			
 		}
