@@ -26,8 +26,8 @@ namespace FileProcessingDB.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    min = table.Column<float>(type: "real", nullable: false),
-                    max = table.Column<float>(type: "real", nullable: false)
+                    Min = table.Column<float>(type: "real", nullable: false),
+                    Max = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,8 +40,8 @@ namespace FileProcessingDB.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    min = table.Column<int>(type: "int", nullable: false),
-                    max = table.Column<int>(type: "int", nullable: false)
+                    Min = table.Column<int>(type: "int", nullable: false),
+                    Max = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,8 +54,8 @@ namespace FileProcessingDB.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    min = table.Column<float>(type: "real", nullable: false),
-                    max = table.Column<float>(type: "real", nullable: false)
+                    Min = table.Column<float>(type: "real", nullable: false),
+                    Max = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,80 +100,86 @@ namespace FileProcessingDB.Migrations
                     IDAdv = table.Column<int>(type: "int", nullable: false),
                     IDAm = table.Column<int>(type: "int", nullable: false),
                     IDCr = table.Column<int>(type: "int", nullable: false),
-                    IDl = table.Column<int>(type: "int", nullable: false),
+                    IDL = table.Column<int>(type: "int", nullable: false),
                     IDPr = table.Column<int>(type: "int", nullable: false),
-                    IDSt = table.Column<int>(type: "int", nullable: false)
+                    IDSt = table.Column<int>(type: "int", nullable: false),
+                    AdvertiserId = table.Column<int>(type: "int", nullable: true),
+                    AmountId = table.Column<int>(type: "int", nullable: true),
+                    CreditScoreId = table.Column<int>(type: "int", nullable: true),
+                    LtvId = table.Column<int>(type: "int", nullable: true),
+                    ProductTypeId = table.Column<int>(type: "int", nullable: true),
+                    StateId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BaseRates", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BaseRates_Advertisers_IDAdv",
-                        column: x => x.IDAdv,
+                        name: "FK_BaseRates_Advertisers_AdvertiserId",
+                        column: x => x.AdvertiserId,
                         principalTable: "Advertisers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BaseRates_Amounts_IDAm",
-                        column: x => x.IDAm,
+                        name: "FK_BaseRates_Amounts_AmountId",
+                        column: x => x.AmountId,
                         principalTable: "Amounts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BaseRates_CreditScores_IDCr",
-                        column: x => x.IDCr,
+                        name: "FK_BaseRates_CreditScores_CreditScoreId",
+                        column: x => x.CreditScoreId,
                         principalTable: "CreditScores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BaseRates_ltvs_IDl",
-                        column: x => x.IDl,
+                        name: "FK_BaseRates_ltvs_LtvId",
+                        column: x => x.LtvId,
                         principalTable: "ltvs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BaseRates_ProductTypes_IDPr",
-                        column: x => x.IDPr,
+                        name: "FK_BaseRates_ProductTypes_ProductTypeId",
+                        column: x => x.ProductTypeId,
                         principalTable: "ProductTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BaseRates_States_IDSt",
-                        column: x => x.IDSt,
+                        name: "FK_BaseRates_States_StateId",
+                        column: x => x.StateId,
                         principalTable: "States",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BaseRates_IDAdv",
+                name: "IX_BaseRates_AdvertiserId",
                 table: "BaseRates",
-                column: "IDAdv");
+                column: "AdvertiserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BaseRates_IDAm",
+                name: "IX_BaseRates_AmountId",
                 table: "BaseRates",
-                column: "IDAm");
+                column: "AmountId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BaseRates_IDCr",
+                name: "IX_BaseRates_CreditScoreId",
                 table: "BaseRates",
-                column: "IDCr");
+                column: "CreditScoreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BaseRates_IDl",
+                name: "IX_BaseRates_LtvId",
                 table: "BaseRates",
-                column: "IDl");
+                column: "LtvId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BaseRates_IDPr",
+                name: "IX_BaseRates_ProductTypeId",
                 table: "BaseRates",
-                column: "IDPr");
+                column: "ProductTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BaseRates_IDSt",
+                name: "IX_BaseRates_StateId",
                 table: "BaseRates",
-                column: "IDSt");
+                column: "StateId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

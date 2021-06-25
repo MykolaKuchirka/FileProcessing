@@ -41,10 +41,10 @@ namespace FileProcessingDB.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<float>("max")
+                    b.Property<float>("Max")
                         .HasColumnType("real");
 
-                    b.Property<float>("min")
+                    b.Property<float>("Min")
                         .HasColumnType("real");
 
                     b.HasKey("Id");
@@ -59,6 +59,15 @@ namespace FileProcessingDB.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AdvertiserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AmountId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CreditScoreId")
+                        .HasColumnType("int");
+
                     b.Property<int>("IDAdv")
                         .HasColumnType("int");
 
@@ -68,17 +77,26 @@ namespace FileProcessingDB.Migrations
                     b.Property<int>("IDCr")
                         .HasColumnType("int");
 
+                    b.Property<int>("IDL")
+                        .HasColumnType("int");
+
                     b.Property<int>("IDPr")
                         .HasColumnType("int");
 
                     b.Property<int>("IDSt")
                         .HasColumnType("int");
 
-                    b.Property<int>("IDl")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("LtvId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StateId")
+                        .HasColumnType("int");
 
                     b.Property<int>("TotalTerm")
                         .HasColumnType("int");
@@ -88,17 +106,17 @@ namespace FileProcessingDB.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IDAdv");
+                    b.HasIndex("AdvertiserId");
 
-                    b.HasIndex("IDAm");
+                    b.HasIndex("AmountId");
 
-                    b.HasIndex("IDCr");
+                    b.HasIndex("CreditScoreId");
 
-                    b.HasIndex("IDPr");
+                    b.HasIndex("LtvId");
 
-                    b.HasIndex("IDSt");
+                    b.HasIndex("ProductTypeId");
 
-                    b.HasIndex("IDl");
+                    b.HasIndex("StateId");
 
                     b.ToTable("BaseRates");
                 });
@@ -110,15 +128,33 @@ namespace FileProcessingDB.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("max")
+                    b.Property<int>("Max")
                         .HasColumnType("int");
 
-                    b.Property<int>("min")
+                    b.Property<int>("Min")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("CreditScores");
+                });
+
+            modelBuilder.Entity("FileProcessingDB.DataModel.Ltv", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("Max")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Min")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ltvs");
                 });
 
             modelBuilder.Entity("FileProcessingDB.DataModel.ProductType", b =>
@@ -151,61 +187,31 @@ namespace FileProcessingDB.Migrations
                     b.ToTable("States");
                 });
 
-            modelBuilder.Entity("FileProcessingDB.DataModel.ltv", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<float>("max")
-                        .HasColumnType("real");
-
-                    b.Property<float>("min")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ltvs");
-                });
-
             modelBuilder.Entity("FileProcessingDB.DataModel.BaseRate", b =>
                 {
                     b.HasOne("FileProcessingDB.DataModel.Advertiser", "Advertiser")
-                        .WithMany("baserates")
-                        .HasForeignKey("IDAdv")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Baserates")
+                        .HasForeignKey("AdvertiserId");
 
                     b.HasOne("FileProcessingDB.DataModel.Amount", "Amount")
-                        .WithMany("baserates")
-                        .HasForeignKey("IDAm")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Baserates")
+                        .HasForeignKey("AmountId");
 
                     b.HasOne("FileProcessingDB.DataModel.CreditScore", "CreditScore")
-                        .WithMany("baserates")
-                        .HasForeignKey("IDCr")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Baserates")
+                        .HasForeignKey("CreditScoreId");
+
+                    b.HasOne("FileProcessingDB.DataModel.Ltv", "Ltv")
+                        .WithMany("Baserates")
+                        .HasForeignKey("LtvId");
 
                     b.HasOne("FileProcessingDB.DataModel.ProductType", "ProductType")
-                        .WithMany("baserates")
-                        .HasForeignKey("IDPr")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Baserates")
+                        .HasForeignKey("ProductTypeId");
 
                     b.HasOne("FileProcessingDB.DataModel.State", "State")
-                        .WithMany("baserates")
-                        .HasForeignKey("IDSt")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FileProcessingDB.DataModel.ltv", "ltv")
-                        .WithMany("baserates")
-                        .HasForeignKey("IDl")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Baserates")
+                        .HasForeignKey("StateId");
 
                     b.Navigation("Advertiser");
 
@@ -213,7 +219,7 @@ namespace FileProcessingDB.Migrations
 
                     b.Navigation("CreditScore");
 
-                    b.Navigation("ltv");
+                    b.Navigation("Ltv");
 
                     b.Navigation("ProductType");
 
@@ -222,32 +228,32 @@ namespace FileProcessingDB.Migrations
 
             modelBuilder.Entity("FileProcessingDB.DataModel.Advertiser", b =>
                 {
-                    b.Navigation("baserates");
+                    b.Navigation("Baserates");
                 });
 
             modelBuilder.Entity("FileProcessingDB.DataModel.Amount", b =>
                 {
-                    b.Navigation("baserates");
+                    b.Navigation("Baserates");
                 });
 
             modelBuilder.Entity("FileProcessingDB.DataModel.CreditScore", b =>
                 {
-                    b.Navigation("baserates");
+                    b.Navigation("Baserates");
+                });
+
+            modelBuilder.Entity("FileProcessingDB.DataModel.Ltv", b =>
+                {
+                    b.Navigation("Baserates");
                 });
 
             modelBuilder.Entity("FileProcessingDB.DataModel.ProductType", b =>
                 {
-                    b.Navigation("baserates");
+                    b.Navigation("Baserates");
                 });
 
             modelBuilder.Entity("FileProcessingDB.DataModel.State", b =>
                 {
-                    b.Navigation("baserates");
-                });
-
-            modelBuilder.Entity("FileProcessingDB.DataModel.ltv", b =>
-                {
-                    b.Navigation("baserates");
+                    b.Navigation("Baserates");
                 });
 #pragma warning restore 612, 618
         }

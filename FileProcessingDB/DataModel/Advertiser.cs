@@ -10,6 +10,6 @@ namespace FileProcessingDB.DataModel
 		public int Id { get; set; }
 		public string Name { get; set; }		
 
-		public List<BaseRate> baserates { get; set; }
+		public List<BaseRate> Baserates { get; set; }
 	}
 }
