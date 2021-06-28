@@ -4,12 +4,12 @@ using System.Text;
 
 namespace FileProcessingDB.DataModel
 {
-	public  class ltv
+	public  class Ltv
 	{
-		public int IDl { get; set; }
-		public float min { get; set; }
-		public float max { get; set; }
+		public int Id { get; set; }
+		public float Min { get; set; }
+		public float Max { get; set; }
 
-		public List<BaseRate> baserates { get; set; }
+		public List<BaseRate> Baserates { get; set; }
 	}
 }

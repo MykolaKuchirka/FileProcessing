@@ -6,10 +6,10 @@ namespace FileProcessingDB.DataModel
 {
 	public class Amount
 	{
-		public int IDAm { get; set; }
-		public float min { get; set; }
-		public float max { get; set; }
+		public int Id { get; set; }
+		public float Min { get; set; }
+		public float Max { get; set; }
 
-		public List<BaseRate> baserates { get; set; }
+		public List<BaseRate> Baserates { get; set; }
 	}
 }
