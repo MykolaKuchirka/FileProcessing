@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FileProcessingDB.Migrations
 {
     [DbContext(typeof(FileProcessingDBContext))]
-    [Migration("20210625161617_Init")]
-    partial class Init
+    [Migration("20210628093930_MaxLength")]
+    partial class MaxLength
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,10 +26,12 @@ namespace FileProcessingDB.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -41,12 +43,16 @@ namespace FileProcessingDB.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<float>("Max")
+                        .HasMaxLength(10)
                         .HasColumnType("real");
 
                     b.Property<float>("Min")
+                        .HasMaxLength(10)
                         .HasColumnType("real");
 
                     b.HasKey("Id");
@@ -59,16 +65,9 @@ namespace FileProcessingDB.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AdvertiserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AmountId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreditScoreId")
-                        .HasColumnType("int");
 
                     b.Property<int>("IDAdv")
                         .HasColumnType("int");
@@ -91,34 +90,27 @@ namespace FileProcessingDB.Migrations
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("LtvId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StateId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TotalTerm")
+                        .HasMaxLength(10)
                         .HasColumnType("int");
 
                     b.Property<float>("Value")
+                        .HasMaxLength(10)
                         .HasColumnType("real");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdvertiserId");
+                    b.HasIndex("IDAdv");
 
-                    b.HasIndex("AmountId");
+                    b.HasIndex("IDAm");
 
-                    b.HasIndex("CreditScoreId");
+                    b.HasIndex("IDCr");
 
-                    b.HasIndex("LtvId");
+                    b.HasIndex("IDL");
 
-                    b.HasIndex("ProductTypeId");
+                    b.HasIndex("IDPr");
 
-                    b.HasIndex("StateId");
+                    b.HasIndex("IDSt");
 
                     b.ToTable("BaseRates");
                 });
@@ -128,12 +120,16 @@ namespace FileProcessingDB.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Max")
+                        .HasMaxLength(10)
                         .HasColumnType("int");
 
                     b.Property<int>("Min")
+                        .HasMaxLength(10)
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -146,12 +142,16 @@ namespace FileProcessingDB.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<float>("Max")
+                        .HasMaxLength(10)
                         .HasColumnType("real");
 
                     b.Property<float>("Min")
+                        .HasMaxLength(10)
                         .HasColumnType("real");
 
                     b.HasKey("Id");
@@ -164,10 +164,12 @@ namespace FileProcessingDB.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -179,10 +181,12 @@ namespace FileProcessingDB.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -193,27 +197,39 @@ namespace FileProcessingDB.Migrations
                 {
                     b.HasOne("FileProcessingDB.DataModel.Advertiser", "Advertiser")
                         .WithMany("Baserates")
-                        .HasForeignKey("AdvertiserId");
+                        .HasForeignKey("IDAdv")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FileProcessingDB.DataModel.Amount", "Amount")
                         .WithMany("Baserates")
-                        .HasForeignKey("AmountId");
+                        .HasForeignKey("IDAm")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FileProcessingDB.DataModel.CreditScore", "CreditScore")
                         .WithMany("Baserates")
-                        .HasForeignKey("CreditScoreId");
+                        .HasForeignKey("IDCr")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FileProcessingDB.DataModel.Ltv", "Ltv")
                         .WithMany("Baserates")
-                        .HasForeignKey("LtvId");
+                        .HasForeignKey("IDL")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FileProcessingDB.DataModel.ProductType", "ProductType")
                         .WithMany("Baserates")
-                        .HasForeignKey("ProductTypeId");
+                        .HasForeignKey("IDPr")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FileProcessingDB.DataModel.State", "State")
                         .WithMany("Baserates")
-                        .HasForeignKey("StateId");
+                        .HasForeignKey("IDSt")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Advertiser");
 

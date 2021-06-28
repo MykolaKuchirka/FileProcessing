@@ -11,6 +11,7 @@ namespace FileProcessingDB.DataModel
 	{
 		public FileProcessingDBContext() 
 		{
+			Database.EnsureDeleted();
 			Database.EnsureCreated();
 		}
 		
@@ -28,7 +29,13 @@ namespace FileProcessingDB.DataModel
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			
+			modelBuilder.ApplyConfiguration(new AdvertiserConfiguration());
+			modelBuilder.ApplyConfiguration(new AmountConfiguration());
+			modelBuilder.ApplyConfiguration(new BaseRateConfiguration());
+			modelBuilder.ApplyConfiguration(new CreditScoreConfiguration());
+			modelBuilder.ApplyConfiguration(new LtvConfiguration());
+			modelBuilder.ApplyConfiguration(new ProductTypeConfiguration());
+			modelBuilder.ApplyConfiguration(new StateConfiguration());
 		}
 
 	}
