@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using FileProcessingDB.DataModel;
+using FileProcessingDB.Services;
+using FileProcessingDB;
+using FileProcessingDB.IServices;
 
 namespace FileProcessing.API
 {
@@ -34,6 +37,14 @@ namespace FileProcessing.API
 
 			services.AddControllersWithViews();
 			services.AddDbContext<FileProcessingDBContext>();
+			services.AddTransient<IFileProcessingDBContext, FileProcessingDBContext>();
+			services.AddTransient<IAdvertiserServices, AdvertiserServices>();
+			services.AddTransient<IAmountServices,AmountServices>();
+			services.AddTransient<IBaseRateServices,BaseRateServices>();
+			services.AddTransient<ICreditScoreServices, CreditScoreServices>();
+			services.AddTransient<ILtvServices, LtvServices>();
+			services.AddTransient<IProductTypeServices, ProductTypeServices>();
+			services.AddTransient<IStateServices, StateServices>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

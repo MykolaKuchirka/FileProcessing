@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileProcessing.API", "FileP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileProcessingDB", "FileProcessingDB\FileProcessingDB.csproj", "{B2DAA0EE-013B-4E1D-8295-947FBD164451}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProcessingApplication", "ApplicationCore\FileProcessingApplication.csproj", "{DC229920-BA7A-4D6A-A283-A9B21452A40E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProcessingApplication", "FileProcessingApplication\FileProcessingApplication.csproj", "{76519219-1F22-4E5A-BB34-F59553229EA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{B2DAA0EE-013B-4E1D-8295-947FBD164451}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2DAA0EE-013B-4E1D-8295-947FBD164451}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2DAA0EE-013B-4E1D-8295-947FBD164451}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC229920-BA7A-4D6A-A283-A9B21452A40E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC229920-BA7A-4D6A-A283-A9B21452A40E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC229920-BA7A-4D6A-A283-A9B21452A40E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC229920-BA7A-4D6A-A283-A9B21452A40E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76519219-1F22-4E5A-BB34-F59553229EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76519219-1F22-4E5A-BB34-F59553229EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76519219-1F22-4E5A-BB34-F59553229EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76519219-1F22-4E5A-BB34-F59553229EA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

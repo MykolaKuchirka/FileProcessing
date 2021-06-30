@@ -5,14 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using FileProcessingDB.DataModel;
 using FileProcessingDB.Configuration;
 
+
 namespace FileProcessingDB.DataModel
-{
-	public class FileProcessingDBContext : DbContext
+{	 
+	public class FileProcessingDBContext : DbContext, IFileProcessingDBContext
 	{
 		public FileProcessingDBContext() 
-		{
-			Database.EnsureDeleted();
-			Database.EnsureCreated();
+		{			
 		}
 		
 		public DbSet<BaseRate> BaseRates { get; set; }
