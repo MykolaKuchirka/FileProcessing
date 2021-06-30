@@ -8,13 +8,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using FileProcessingDB.DataModel;
 using FileProcessingApplication;
+using FileProcessingDB.IServices;
+
 namespace FileProcessing.API
 {
 	public class Program
 	{
 		public static void Main(string[] args)
 		{			
-			FileProcessingParsing.OpenEXEL();
+			//FileProcessingParsing.OpenEXEL();
 			CreateHostBuilder(args).Build().Run();						
 		}
 

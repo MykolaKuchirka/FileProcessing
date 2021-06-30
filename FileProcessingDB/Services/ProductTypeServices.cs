@@ -1,4 +1,5 @@
 ﻿using FileProcessingDB.DataModel;
+using FileProcessingDB.FileProcessingDTO;
 using FileProcessingDB.IServices;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,16 @@ namespace FileProcessingDB.Services
 {
 	public class ProductTypeServices: IProductTypeServices
 	{
-		public void WriteProductType(string name)
-		{
+		public void WriteProductType(List<ProductTypeDTO> productTypeDTOs)
+		{			
 			using (FileProcessingDBContext db = new FileProcessingDBContext())
 			{
-				ProductType NewProductType = new ProductType { Name = name };
-				db.ProductTypes.Add(NewProductType);
-				db.SaveChanges();
+				foreach (ProductTypeDTO productTypeDTO in productTypeDTOs)
+				{
+					ProductType NewProductType = new ProductType { Name = productTypeDTO.Name };
+					db.ProductTypes.Add(NewProductType);
+					db.SaveChanges();					
+				}
 			}
 		}
 	}

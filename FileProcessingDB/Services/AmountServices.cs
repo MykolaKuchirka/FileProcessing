@@ -1,4 +1,5 @@
 ﻿using FileProcessingDB.DataModel;
+using FileProcessingDB.FileProcessingDTO;
 using FileProcessingDB.IServices;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,18 @@ namespace FileProcessingDB.Services
 {
 	public class AmountServices: IAmountServices
 	{
-		public void WriteAmount(float min, float max)
+		public void WriteAmount(List<AmountDTO> amountDTOs)
 		{
+			int x = 0;
 			using (FileProcessingDBContext db = new FileProcessingDBContext())
 			{
-				Amount NewAmount = new Amount { Min = min, Max = max };
-				db.Amounts.Add(NewAmount);
-				db.SaveChanges();				
+				foreach (AmountDTO amountDTO in amountDTOs)
+				{
+					Amount NewAmount = new Amount { Min = amountDTOs[x].Min, Max = amountDTOs[x].Max };
+					db.Amounts.Add(NewAmount);
+					db.SaveChanges();
+					x++;
+				}
 			}
 		}
 	}

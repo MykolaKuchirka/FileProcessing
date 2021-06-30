@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileProcessingApplication.FileProcessingDTO
+namespace FileProcessingDB.FileProcessingDTO
 {
-	public class StateDTO
-	{
+	public class AdvertiserDTO
+	{		
 		public string Name { get; set; }
 	}
 }

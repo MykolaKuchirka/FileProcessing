@@ -3,18 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using FileProcessingDB.IServices;
+using FileProcessingDB.FileProcessingDTO;
 
 namespace FileProcessingDB.Services
 {
 	public class StateServices:IStateServices
 	{
-		public void WriteState(string name)
+		public void WriteState(List<StateDTO> stateDTOs)
 		{
+			int x = 0;
 			using (FileProcessingDBContext db = new FileProcessingDBContext())
 			{
-				State NewState = new State { Name = name };
-				db.States.Add(NewState);
-				db.SaveChanges();
+				foreach (StateDTO stateDTO in stateDTOs)
+				{
+					State NewState = new State { Name = stateDTOs[x].Name };
+					db.States.Add(NewState);
+					db.SaveChanges();
+					x++;
+				}
 			}
 		}
 	}

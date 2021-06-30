@@ -16,6 +16,7 @@ using FileProcessingDB.DataModel;
 using FileProcessingDB.Services;
 using FileProcessingDB;
 using FileProcessingDB.IServices;
+using FileProcessingApplication;
 
 namespace FileProcessing.API
 {
@@ -48,8 +49,12 @@ namespace FileProcessing.API
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
+			IAdvertiserServices advertiserServices, IAmountServices amountServices,
+			IBaseRateServices baseRateServices, ICreditScoreServices creditScoreServices, 
+			ILtvServices ltvServices, IProductTypeServices productTypeServices, IStateServices stateServices)
 		{
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
@@ -61,6 +66,10 @@ namespace FileProcessing.API
 
 			app.UseAuthorization();
 
+			var FileParsing = new FileProcessingParsing(advertiserServices, amountServices, baseRateServices, 
+				creditScoreServices, ltvServices, productTypeServices, stateServices);
+			FileParsing.OpenEXEL();
+			
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
