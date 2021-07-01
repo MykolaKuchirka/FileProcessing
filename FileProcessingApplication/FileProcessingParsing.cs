@@ -15,7 +15,7 @@ using FileProcessingDB.IServices;
 
 namespace FileProcessingApplication
 {
-    public class FileProcessingParsing
+    public class FileProcessingParsing: IFileProcessingParsing
     {
         private readonly IAdvertiserServices advertiserServices;
         private readonly IAmountServices amountServices;
@@ -36,7 +36,7 @@ namespace FileProcessingApplication
             this.productTypeServices = productTypeServices;
             this.stateServices = stateServices;
         }
-        public void OpenEXEL()
+        public void OpenEXCEL()
         {
             var Advertiser = new List<AdvertiserDTO>();
             var Amount = new List<AmountDTO>();

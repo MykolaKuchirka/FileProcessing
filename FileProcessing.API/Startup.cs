@@ -46,13 +46,15 @@ namespace FileProcessing.API
 			services.AddTransient<ILtvServices, LtvServices>();
 			services.AddTransient<IProductTypeServices, ProductTypeServices>();
 			services.AddTransient<IStateServices, StateServices>();
+			services.AddTransient<IFileProcessingParsing, FileProcessingParsing>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
 			IAdvertiserServices advertiserServices, IAmountServices amountServices,
 			IBaseRateServices baseRateServices, ICreditScoreServices creditScoreServices, 
-			ILtvServices ltvServices, IProductTypeServices productTypeServices, IStateServices stateServices)
+			ILtvServices ltvServices, IProductTypeServices productTypeServices, IStateServices stateServices, 
+			IFileProcessingParsing fileProcessingParsing)
 		{
 
 			if (env.IsDevelopment())
@@ -66,9 +68,9 @@ namespace FileProcessing.API
 
 			app.UseAuthorization();
 
-			var FileParsing = new FileProcessingParsing(advertiserServices, amountServices, baseRateServices, 
-				creditScoreServices, ltvServices, productTypeServices, stateServices);
-			FileParsing.OpenEXEL();
+			//var FileParsing = new FileProcessingParsing(advertiserServices, amountServices, baseRateServices, 
+			//	creditScoreServices, ltvServices, productTypeServices, stateServices);
+			//FileParsing.OpenEXCEL();
 			
 			app.UseEndpoints(endpoints =>
 			{
