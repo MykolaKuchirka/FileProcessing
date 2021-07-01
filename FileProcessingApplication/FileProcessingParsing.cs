@@ -131,6 +131,7 @@ namespace FileProcessingApplication
             productTypeServices.WriteProductType(ProductType);
             stateServices.WriteState(State);
             baseRateServices.WriteBaseRate(BaseRate);
+            advertiserServices.Dispose();
         }
     }
 }
