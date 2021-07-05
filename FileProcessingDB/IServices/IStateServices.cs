@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FileProcessingDB.IServices
 {
-	public interface IStateServices
+	public interface IStateServices: IDisposable
 	{
 		public void WriteState(List<StateDTO> stateDTOs);
 	}

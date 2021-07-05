@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using FileProcessingDB.DataModel;
 using FileProcessingDB.FileProcessingDTO;
@@ -9,38 +10,21 @@ namespace FileProcessingDB.Services
 {	
 	public class AdvertiserServices: IAdvertiserServices
 	{
-		private FileProcessingDBContext db;
-		private bool disposed = false;
+		private readonly FileProcessingDBContext _database;		
 
-		public AdvertiserServices()
-		{
-			this.db = new FileProcessingDBContext();
-		}
+		public AdvertiserServices()	 =>
+			_database = new FileProcessingDBContext();	
 
-		public void WriteAdvertiser(List<AdvertiserDTO> advertiserDTOs)
+		public void WriteAdvertiser(List<AdvertiserDTO> advertisers)
 		{				
-			int x = 0;
-			foreach (AdvertiserDTO advertiserDTO in advertiserDTOs)
-			{
-				Advertiser NewAdvertiser = new Advertiser { Name = advertiserDTOs[x].Name };
-				db.Advertisers.Add(NewAdvertiser);
-				db.SaveChanges();
-				x++;
-			}			
-		}
-		protected virtual void Dispose (bool disposing)
-		{
-			if (!disposed)
-			{
-				if (disposing)
-				{
-					this.db.Dispose();
-				}
-			}
-		}
+				var dataToSave = advertisers.Select(a => new Advertiser { Name = a.Name });
+				_database.Advertisers.AddRange(dataToSave);
+				_database.SaveChanges();
+		}				
+
 		public void Dispose()
 		{
-			Dispose(true);
+			_database.Dispose();
 			GC.SuppressFinalize(this);
 		}
 	}

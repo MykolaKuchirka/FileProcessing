@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @using FileProcessingDB.FileProcessingDTO;
+    
+    @model IEnumerable<BaseRateDTO>
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>List</title>
+    </head>
+    <body>
+        <h2> All baserates</h2>
+        @{int count = 1;
+            foreach (var baseRate in Model)
+            {
+                <div>
+                    <h2>BaseRate @count | @baseRate.Value | @baseRate.TotalTerm | @baseRate.LastModified | @baseRate.IdAdv | @baseRate.IdAm | @baseRate.IdCr | @baseRate.IdL | @baseRate.IdPr | @baseRate.IdSt</h2>
+                </div>
+                count++;
+            }
+
+        }
+    </body>
+</html>
+}

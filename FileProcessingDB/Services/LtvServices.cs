@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using FileProcessingDB.DataModel;
 using FileProcessingDB.FileProcessingDTO;
@@ -7,21 +8,24 @@ using FileProcessingDB.IServices;
 
 namespace FileProcessingDB.Services
 {
-	public class LtvServices: ILtvServices
+	public class LtvServices : ILtvServices
 	{
-		public void WriteLtv(List<LtvDTO> ltvDTOs)
+		private readonly FileProcessingDBContext _database;
+
+		public LtvServices() =>
+			_database = new FileProcessingDBContext();
+
+		public void WriteLtv(List<LtvDTO> ltvs)
 		{
-			int x = 0;
-			using (FileProcessingDBContext db = new FileProcessingDBContext())
-			{
-				foreach (LtvDTO ltvDTO in ltvDTOs)
-				{
-					Ltv NewLtv = new Ltv { Min = ltvDTOs[x].Min, Max = ltvDTOs[x].Max };
-					db.ltvs.Add(NewLtv);
-					db.SaveChanges();
-					x++;
-				}
-			}
+			var dataToSave = ltvs.Select(a => new Ltv { Min = a.Min, Max = a.Max });
+			_database.ltvs.AddRange(dataToSave);
+			_database.SaveChanges();
+		}
+
+		public void Dispose()
+		{
+			_database.Dispose();
+			GC.SuppressFinalize(this);
 		}
 	}
 }

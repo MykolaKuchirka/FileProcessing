@@ -124,6 +124,7 @@ namespace FileProcessingApplication
                 //Console.ReadKey();
             }
             templateStream.Close();
+
             advertiserServices.WriteAdvertiser(Advertiser);
             amountServices.WriteAmount(Amount);
             creditScoreServices.WriteCreditScore(CreditScore);
@@ -132,6 +133,17 @@ namespace FileProcessingApplication
             stateServices.WriteState(State);
             baseRateServices.WriteBaseRate(BaseRate);
             advertiserServices.Dispose();
+            amountServices.Dispose();
+            creditScoreServices.Dispose();
+            ltvServices.Dispose();
+            productTypeServices.Dispose();
+            stateServices.Dispose();
+            baseRateServices.Dispose();
+        }
+        public IEnumerable<BaseRateDTO> Getall()
+		{
+            var myrate = baseRateServices.GetAll();
+            return myrate;
         }
     }
 }

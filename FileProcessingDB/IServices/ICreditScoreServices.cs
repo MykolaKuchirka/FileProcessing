@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FileProcessingDB.IServices
 {
-	public interface ICreditScoreServices
+	public interface ICreditScoreServices: IDisposable
 	{
 		public void WriteCreditScore(List<CreditScoreDTO> creditScoreDTOs);
 	}

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FileProcessingDB.IServices
 {
-	public interface ILtvServices
+	public interface ILtvServices: IDisposable
 	{
 		public void WriteLtv(List<LtvDTO> ltvDTOs);
 	}

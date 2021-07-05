@@ -20,7 +20,12 @@ namespace FileProcessing.API.Controllers
 		public IActionResult Index()
 		{
 			fileProcessingParsing.OpenEXCEL();
-			return View();			
+			return Ok();			
+		}
+		[Route("/GetAll")]
+		public IActionResult GetAll()
+		{			
+			return View(fileProcessingParsing.Getall());
 		}
 	}
 }

@@ -1,28 +1,31 @@
-﻿using FileProcessingDB.DataModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using FileProcessingDB.DataModel;
 using FileProcessingDB.FileProcessingDTO;
 using FileProcessingDB.IServices;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 
 namespace FileProcessingDB.Services
 {
-	public class AmountServices: IAmountServices
+	public class AmountServices : IAmountServices
 	{
-		public void WriteAmount(List<AmountDTO> amountDTOs)
+		private readonly FileProcessingDBContext _database;
+
+		public AmountServices() =>
+			_database = new FileProcessingDBContext();
+
+		public void WriteAmount(List<AmountDTO> amounts)
 		{
-			int x = 0;
-			using (FileProcessingDBContext db = new FileProcessingDBContext())
-			{
-				foreach (AmountDTO amountDTO in amountDTOs)
-				{
-					Amount NewAmount = new Amount { Min = amountDTOs[x].Min, Max = amountDTOs[x].Max };
-					db.Amounts.Add(NewAmount);
-					db.SaveChanges();
-					x++;
-				}
-			}
+			var dataToSave = amounts.Select(a => new Amount { Min = a.Min, Max = a.Max });
+			_database.Amounts.AddRange(dataToSave);
+			_database.SaveChanges();
+		}
+
+		public void Dispose()
+		{
+			_database.Dispose();
+			GC.SuppressFinalize(this);
 		}
 	}
 }

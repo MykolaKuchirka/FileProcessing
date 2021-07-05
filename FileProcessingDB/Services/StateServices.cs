@@ -1,27 +1,31 @@
-﻿using FileProcessingDB.DataModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using FileProcessingDB.IServices;
+using FileProcessingDB.DataModel;
 using FileProcessingDB.FileProcessingDTO;
+using FileProcessingDB.IServices;
 
 namespace FileProcessingDB.Services
 {
-	public class StateServices:IStateServices
+	public class StateServices : IStateServices
 	{
-		public void WriteState(List<StateDTO> stateDTOs)
+		private readonly FileProcessingDBContext _database;
+
+		public StateServices() =>
+			_database = new FileProcessingDBContext();
+
+		public void WriteState(List<StateDTO> states)
 		{
-			int x = 0;
-			using (FileProcessingDBContext db = new FileProcessingDBContext())
-			{
-				foreach (StateDTO stateDTO in stateDTOs)
-				{
-					State NewState = new State { Name = stateDTOs[x].Name };
-					db.States.Add(NewState);
-					db.SaveChanges();
-					x++;
-				}
-			}
+			var dataToSave = states.Select(a => new State { Name = a.Name });
+			_database.States.AddRange(dataToSave);
+			_database.SaveChanges();
+		}
+
+		public void Dispose()
+		{
+			_database.Dispose();
+			GC.SuppressFinalize(this);
 		}
 	}
 }
