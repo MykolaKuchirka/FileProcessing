@@ -16,8 +16,7 @@ namespace FileProcessingDB.Services
 			_database = new FileProcessingDBContext();
 	
 		public void WriteBaseRate(List<BaseRateDTO> baseRates)
-		{
-			int x = 0;
+		{			
 			var Advertiser = _database.Advertisers.ToList();
 			var CountAdv = Advertiser.Count();
 	
@@ -36,17 +35,14 @@ namespace FileProcessingDB.Services
 			var State = _database.States.ToList();
 			var CountSt = State.Count();
 	
-			foreach (BaseRateDTO baseRateDTO in baseRates)
-			{
-	
-				baseRateDTO.IdAdv = CountAdv + x - 7;
-				baseRateDTO.IdAm = CountAm + x - 7;
-				baseRateDTO.IdCr = CountCr + x - 7;
-				baseRateDTO.IdL = CountLtv + x - 7;
-				baseRateDTO.IdPr = CountPr + x - 7;
-				baseRateDTO.IdSt = CountSt + x - 7;
-				
-				x++;
+			foreach (var baseRateDTO in baseRates.Select((value, i) => new { i, value}))
+			{				
+				baseRateDTO.value.IdAdv = CountAdv + baseRateDTO.i - 7;
+				baseRateDTO.value.IdAm = CountAm + baseRateDTO.i - 7;
+				baseRateDTO.value.IdCr = CountCr + baseRateDTO.i - 7;
+				baseRateDTO.value.IdL = CountLtv + baseRateDTO.i - 7;
+				baseRateDTO.value.IdPr = CountPr + baseRateDTO.i - 7;
+				baseRateDTO.value.IdSt = CountSt + baseRateDTO.i - 7;
 			}
 			var dataToSave = baseRates.Select(a => new BaseRate { Value = a.Value, TotalTerm = a.TotalTerm, 
 				LastModified = a.LastModified, IDAdv =a.IdAdv, IDAm = a.IdAm, IDCr = a.IdCr, IDL = a.IdL, 
@@ -55,20 +51,32 @@ namespace FileProcessingDB.Services
 			_database.SaveChanges();
 		}
 		
-		public IEnumerable<BaseRateDTO> GetAll()
+		public IEnumerable<BaseRate> GetAll()
 		{
 			var baseRate = _database.BaseRates.ToList();
-			var dataToReturn = baseRate.Select(a => new BaseRateDTO
+			var Advertisers = _database.Advertisers.ToList();
+			var Amounts = _database.Amounts.ToList();
+			var CreditScores = _database.CreditScores.ToList();
+			var Ltvs = _database.ltvs.ToList();
+			var ProductTypes = _database.ProductTypes.ToList();
+			var States = _database.States.ToList();
+			var dataToReturn = baseRate.Select(a => new BaseRate
 			{
 				Value = a.Value,
 				TotalTerm = a.TotalTerm,
-				LastModified = a.LastModified,
-				IdAdv = a.IDAdv,
-				IdAm = a.IDAm,
-				IdCr = a.IDCr,
-				IdL = a.IDL,
-				IdPr = a.IDPr,
-				IdSt = a.IDSt
+				LastModified = a.LastModified,				
+				IDAdv = a.IDAdv,
+				IDAm = a.IDAm,
+				IDCr = a.IDCr,
+				IDL = a.IDL,
+				IDPr = a.IDPr,
+				IDSt = a.IDSt,
+				Advertiser = Advertisers.First(o => o.Id == a.IDAdv),
+				Amount = Amounts.First(o => o.Id == a.IDAm),
+				CreditScore = CreditScores.First(o => o.Id == a.IDCr),
+				Ltv = Ltvs.First(o => o.Id == a.IDL),
+				ProductType = ProductTypes.First(o => o.Id == a.IDPr),
+				State = States.First(o => o.Id == a.IDSt)
 			});
 			return dataToReturn;
 		}		

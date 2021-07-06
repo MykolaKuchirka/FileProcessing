@@ -10,6 +10,6 @@ namespace FileProcessingDB.DataModel
 		public int Min { get; set; }
 		public int Max { get; set; }
 
-		public List<BaseRate> Baserates { get; set; }
+		public virtual List<BaseRate> Baserates { get; set; }
 	}
 }

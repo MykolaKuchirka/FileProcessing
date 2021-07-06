@@ -12,6 +12,7 @@ using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 using FileProcessingDB.Services;
 using FileProcessingDB.IServices;
+using FileProcessingDB.DataModel;
 
 namespace FileProcessingApplication
 {
@@ -140,9 +141,10 @@ namespace FileProcessingApplication
             stateServices.Dispose();
             baseRateServices.Dispose();
         }
-        public IEnumerable<BaseRateDTO> Getall()
+        public IEnumerable<BaseRate> Getall()
 		{
             var myrate = baseRateServices.GetAll();
+            
             return myrate;
         }
     }

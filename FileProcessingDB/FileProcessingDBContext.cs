@@ -24,7 +24,7 @@ namespace FileProcessingDB.DataModel
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer(@"Server=DESKTOP-0SG1T74;Database=FileProcessing;Trusted_Connection=True;");
+			optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"Server=DESKTOP-0SG1T74;Database=FileProcessing;Trusted_Connection=True;");
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
