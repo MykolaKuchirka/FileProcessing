@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FileProcessingDB.FileProcessingDTO
 {
 	public class AdvertiserDTO
-	{		
+	{
 		public string Name { get; set; }
 	}
 }

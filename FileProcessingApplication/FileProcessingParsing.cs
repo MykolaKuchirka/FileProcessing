@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FileProcessingDB.FileProcessingDTO;
 using NPOI.SS.UserModel;
-using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
-using FileProcessingDB.Services;
 using FileProcessingDB.IServices;
 using FileProcessingDB.DataModel;
 
@@ -25,6 +19,7 @@ namespace FileProcessingApplication
         private readonly ILtvServices ltvServices;
         private readonly IProductTypeServices productTypeServices;
         private readonly IStateServices stateServices;
+
         public FileProcessingParsing(IAdvertiserServices advertiserServices, IAmountServices amountServices,
             IBaseRateServices baseRateServices, ICreditScoreServices creditScoreServices,
             ILtvServices ltvServices, IProductTypeServices productTypeServices, IStateServices stateServices)
@@ -37,6 +32,7 @@ namespace FileProcessingApplication
             this.productTypeServices = productTypeServices;
             this.stateServices = stateServices;
         }
+
         public void OpenEXCEL()
         {
             var Advertiser = new List<AdvertiserDTO>();
@@ -55,13 +51,11 @@ namespace FileProcessingApplication
             var NewProductType = new ProductTypeDTO();
             var NewState = new StateDTO();
 
-            //var Finance = new ArrayList() { Advertiser , Amount , BaseRate , CreditScore , Ltv , ProductType , State};
             Stream templateStream = new MemoryStream();
             using (var file = new FileStream("D:\\University\\Практика ASD\\LID441.xlsx", FileMode.Open, FileAccess.Read))
             {
                 var Exel = new XSSFWorkbook(file);
                 ISheet sheet = Exel.GetSheetAt(0);                
-                //sheet.SetAutoFilter(new CellRangeAddress(0, sheet.LastRowNum, 0, 2));
                 int x = 1;                
                 while (x <= sheet.LastRowNum)
                 {
@@ -111,18 +105,9 @@ namespace FileProcessingApplication
                     NewBaseRate.IdPr = 1;
                     NewBaseRate.IdSt = 1;
                     BaseRate.Add(NewBaseRate);
-                    NewBaseRate = new BaseRateDTO();
-
-                                       
-                    //Console.WriteLine(ProductType[x-1].Name);
+                    NewBaseRate = new BaseRateDTO();                                      
                     x++;
                 }
-                
-                //foreach (ProductTypeDTO productTypeDTO in ProductType)
-                //{
-                //    Console.WriteLine(productTypeDTO.Name);                     
-                //}
-                //Console.ReadKey();
             }
             templateStream.Close();
 
@@ -133,6 +118,7 @@ namespace FileProcessingApplication
             productTypeServices.WriteProductType(ProductType);
             stateServices.WriteState(State);
             baseRateServices.WriteBaseRate(BaseRate);
+
             advertiserServices.Dispose();
             amountServices.Dispose();
             creditScoreServices.Dispose();
@@ -141,10 +127,10 @@ namespace FileProcessingApplication
             stateServices.Dispose();
             baseRateServices.Dispose();
         }
+
         public IEnumerable<BaseRate> Getall()
 		{
-            var myrate = baseRateServices.GetAll();
-            
+            var myrate = baseRateServices.GetAll();            
             return myrate;
         }
     }

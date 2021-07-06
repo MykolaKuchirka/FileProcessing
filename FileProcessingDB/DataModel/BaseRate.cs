@@ -16,6 +16,7 @@ namespace FileProcessingDB.DataModel
 		public int IDL { get; set; }
 		public int IDPr { get; set; }
 		public int IDSt { get; set; }
+
 		public virtual Advertiser Advertiser { get; set; }
 		public virtual Amount Amount { get; set; }
 		public virtual CreditScore CreditScore { get; set; }

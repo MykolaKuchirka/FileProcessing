@@ -17,6 +17,5 @@ namespace FileProcessingDB.FileProcessingDTO
 		public int IdL { get; set; }
 		public int IdPr { get; set; }
 		public int IdSt { get; set; }
-
 	}
 }

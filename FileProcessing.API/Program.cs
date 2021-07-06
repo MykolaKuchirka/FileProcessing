@@ -1,14 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FileProcessingDB.DataModel;
-using FileProcessingApplication;
-using FileProcessingDB.IServices;
 
 namespace FileProcessing.API
 {
@@ -16,7 +7,6 @@ namespace FileProcessing.API
 	{
 		public static void Main(string[] args)
 		{			
-			//FileProcessingParsing.OpenEXEL();
 			CreateHostBuilder(args).Build().Run();						
 		}
 

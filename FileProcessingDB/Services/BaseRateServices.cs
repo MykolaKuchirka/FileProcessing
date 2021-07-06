@@ -44,6 +44,7 @@ namespace FileProcessingDB.Services
 				baseRateDTO.value.IdPr = CountPr + baseRateDTO.i - 7;
 				baseRateDTO.value.IdSt = CountSt + baseRateDTO.i - 7;
 			}
+
 			var dataToSave = baseRates.Select(a => new BaseRate { Value = a.Value, TotalTerm = a.TotalTerm, 
 				LastModified = a.LastModified, IDAdv =a.IdAdv, IDAm = a.IdAm, IDCr = a.IdCr, IDL = a.IdL, 
 				IDPr = a.IdPr, IDSt = a.IdSt});

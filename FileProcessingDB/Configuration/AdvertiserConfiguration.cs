@@ -14,8 +14,7 @@ namespace FileProcessingDB.Configuration
 		{
 			builder.HasKey(x => x.Id);
 			builder.Property(x => x.Id).UseIdentityColumn();
-			builder.Property(x => x.Name).HasColumnType("nvarchar(100)");
-			
+			builder.Property(x => x.Name).HasColumnType("nvarchar(100)");			
 		}
 	}
 }

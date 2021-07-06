@@ -26,6 +26,7 @@ namespace FileProcessingDB.DataModel
 		{
 			optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"Server=DESKTOP-0SG1T74;Database=FileProcessing;Trusted_Connection=True;");
 		}
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfiguration(new AdvertiserConfiguration());
@@ -36,6 +37,5 @@ namespace FileProcessingDB.DataModel
 			modelBuilder.ApplyConfiguration(new ProductTypeConfiguration());
 			modelBuilder.ApplyConfiguration(new StateConfiguration());
 		}
-
 	}
 }

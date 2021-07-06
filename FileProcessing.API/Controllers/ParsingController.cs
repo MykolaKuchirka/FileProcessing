@@ -12,16 +12,19 @@ namespace FileProcessing.API.Controllers
 	public class ParsingController : Controller
 	{
 		private readonly IFileProcessingParsing fileProcessingParsing;
+
 		public ParsingController(IFileProcessingParsing fileProcessingParsing)
 		{
 			this.fileProcessingParsing = fileProcessingParsing;
-		}		
+		}
+		
 		[Route("/parse")]
 		public IActionResult Index()
 		{
 			fileProcessingParsing.OpenEXCEL();
 			return Ok();			
 		}
+
 		[Route("/GetAll")]
 		public IActionResult GetAll()
 		{			
