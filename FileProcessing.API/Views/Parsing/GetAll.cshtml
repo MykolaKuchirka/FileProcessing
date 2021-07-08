@@ -1,0 +1,57 @@
+﻿@{
+    @using FileProcessingDB.DataModel;
+    
+    @model IEnumerable<BaseRate>
+
+    <!DOCTYPE html>
+
+    <html>
+
+    <head>
+        <meta name="AllBaseRates" content="width=device-width" />
+        <title>AllBaseRates</title>
+    </head>
+
+    <body>
+        <h2 align="center"> All baserates</h2>
+        <table style="width:100%" border="1">
+            <tr>
+                <th>Advertiser</th>
+                <th>IdAdvertiser</th>
+                <th>ProductType</th>
+                <th>State</th>
+                <th>minLtv</th>
+                <th>maxLtv</th>
+                <th>minAmount</th>
+                <th>maxAmount</th>
+                <th>minCreditScore</th>
+                <th>maxCreditScore</th>
+                <th>BaseRate</th>
+                <th>TotalTerm</th>
+                <th>LastModified</th>
+            </tr>
+            @{int count = 1;
+                foreach (var baseRate in Model)
+                {
+                        <tr>
+                            <th>@baseRate.Advertiser.Name</th>
+                            <th>@baseRate.Advertiser.Id</th>
+                            <th>@baseRate.ProductType.Name</th>
+                            <th>@baseRate.State.Name</th>
+                            <th>@baseRate.Ltv.Min</th>
+                            <th>@baseRate.Ltv.Max</th>
+                            <th>@baseRate.Amount.Min</th>
+                            <th>@baseRate.Amount.Max</th>
+                            <th>@baseRate.CreditScore.Min</th>
+                            <th>@baseRate.CreditScore.Max</th>
+                            <th>@baseRate.Value</th>
+                            <th>@baseRate.TotalTerm</th>
+                            <th>@baseRate.LastModified</th>
+                        </tr>
+                    count++;
+                }
+            }
+        </table>        
+    </body>
+</html>
+}

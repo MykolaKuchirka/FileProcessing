@@ -1,18 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using FileProcessingDB.DataModel;
+using FileProcessingDB.Services;
+using FileProcessingDB;
+using FileProcessingDB.IServices;
+using FileProcessingApplication;
 
 namespace FileProcessing.API
 {
@@ -29,16 +24,29 @@ namespace FileProcessing.API
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			//services.AddDbContext<FileProcessingDBContext>(options =>
-				 //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
 			services.AddControllersWithViews();
+
 			services.AddDbContext<FileProcessingDBContext>();
+
+			services.AddTransient<IFileProcessingDBContext, FileProcessingDBContext>()
+				.AddTransient<IAdvertiserServices, AdvertiserServices>()
+				.AddTransient<IAmountServices,AmountServices>()
+				.AddTransient<IBaseRateServices,BaseRateServices>()
+				.AddTransient<ICreditScoreServices, CreditScoreServices>()
+				.AddTransient<ILtvServices, LtvServices>()
+				.AddTransient<IProductTypeServices, ProductTypeServices>()
+				.AddTransient<IStateServices, StateServices>()
+				.AddTransient<IFileProcessingParsing, FileProcessingParsing>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
+			IAdvertiserServices advertiserServices, IAmountServices amountServices,
+			IBaseRateServices baseRateServices, ICreditScoreServices creditScoreServices, 
+			ILtvServices ltvServices, IProductTypeServices productTypeServices, IStateServices stateServices, 
+			IFileProcessingParsing fileProcessingParsing)
 		{
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
@@ -48,8 +56,8 @@ namespace FileProcessing.API
 
 			app.UseRouting();
 
-			app.UseAuthorization();
-
+			app.UseAuthorization();			
+			
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();

@@ -5,14 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using FileProcessingDB.DataModel;
 using FileProcessingDB.Configuration;
 
+
 namespace FileProcessingDB.DataModel
-{
-	public class FileProcessingDBContext : DbContext
+{	 
+	public class FileProcessingDBContext : DbContext, IFileProcessingDBContext
 	{
 		public FileProcessingDBContext() 
-		{
-			Database.EnsureDeleted();
-			Database.EnsureCreated();
+		{			
 		}
 		
 		public DbSet<BaseRate> BaseRates { get; set; }
@@ -25,8 +24,9 @@ namespace FileProcessingDB.DataModel
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer(@"Server=DESKTOP-0SG1T74;Database=FileProcessing;Trusted_Connection=True;");
+			optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"Server=DESKTOP-0SG1T74;Database=FileProcessing;Trusted_Connection=True;");
 		}
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfiguration(new AdvertiserConfiguration());
@@ -37,6 +37,5 @@ namespace FileProcessingDB.DataModel
 			modelBuilder.ApplyConfiguration(new ProductTypeConfiguration());
 			modelBuilder.ApplyConfiguration(new StateConfiguration());
 		}
-
 	}
 }
