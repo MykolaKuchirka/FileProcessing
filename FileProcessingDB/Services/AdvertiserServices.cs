@@ -20,12 +20,6 @@ namespace FileProcessingDB.Services
 				var dataToSave = advertisers.Select(a => new Advertiser { Name = a.Name });
 				_database.Advertisers.AddRange(dataToSave);
 				_database.SaveChanges();
-		}				
-
-		public void Dispose()
-		{
-			_database.Dispose();
-			GC.SuppressFinalize(this);
 		}
 	}
 }

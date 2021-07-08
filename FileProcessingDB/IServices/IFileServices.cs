@@ -5,8 +5,9 @@ using System.Text;
 
 namespace FileProcessingDB.IServices
 {
-	public interface IStateServices
+	public interface IFileServices
 	{
-		public void WriteState(List<StateDTO> stateDTOs);
+		public void WriteFile(List<FileDTO> fileDTOs);
+		public string GetFilePath(int IdAdv);
 	}
 }

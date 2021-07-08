@@ -16,37 +16,9 @@ namespace FileProcessingDB.Services
 			_database = new FileProcessingDBContext();
 	
 		public void WriteBaseRate(List<BaseRateDTO> baseRates)
-		{			
-			var Advertiser = _database.Advertisers.ToList();
-			var CountAdv = Advertiser.Count();
-	
-			var Amount = _database.Amounts.ToList();
-			var CountAm = Amount.Count();
-	
-			var CreditScore = _database.CreditScores.ToList();
-			var CountCr = CreditScore.Count();
-	
-			var Ltv = _database.ltvs.ToList();
-			var CountLtv = Ltv.Count();
-	
-			var ProductType = _database.ProductTypes.ToList();
-			var CountPr = ProductType.Count();
-	
-			var State = _database.States.ToList();
-			var CountSt = State.Count();
-	
-			foreach (var baseRateDTO in baseRates.Select((value, i) => new { i, value}))
-			{				
-				baseRateDTO.value.IdAdv = CountAdv + baseRateDTO.i - 7;
-				baseRateDTO.value.IdAm = CountAm + baseRateDTO.i - 7;
-				baseRateDTO.value.IdCr = CountCr + baseRateDTO.i - 7;
-				baseRateDTO.value.IdL = CountLtv + baseRateDTO.i - 7;
-				baseRateDTO.value.IdPr = CountPr + baseRateDTO.i - 7;
-				baseRateDTO.value.IdSt = CountSt + baseRateDTO.i - 7;
-			}
-
+		{	
 			var dataToSave = baseRates.Select(a => new BaseRate { Value = a.Value, TotalTerm = a.TotalTerm, 
-				LastModified = a.LastModified, IDAdv =a.IdAdv, IDAm = a.IdAm, IDCr = a.IdCr, IDL = a.IdL, 
+				LastModified = a.LastModified, IDAdv = 1, IDAm = a.IdAm, IDCr = a.IdCr, IDL = a.IdL, 
 				IDPr = a.IdPr, IDSt = a.IdSt});
 			_database.BaseRates.AddRange(dataToSave);
 			_database.SaveChanges();
@@ -80,12 +52,11 @@ namespace FileProcessingDB.Services
 				State = States.First(o => o.Id == a.IDSt)
 			});
 			return dataToReturn;
-		}		
-
-		public void Dispose()
+		}
+		public int CountCurrEl()
 		{
-			_database.Dispose();
-			GC.SuppressFinalize(this);
+			int CurrEl = _database.BaseRates.ToList().Count;
+			return CurrEl;
 		}
 	}
 }

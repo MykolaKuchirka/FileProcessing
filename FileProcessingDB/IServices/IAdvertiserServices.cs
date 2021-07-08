@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FileProcessingDB.IServices
 {
-	public interface IAdvertiserServices: IDisposable
+	public interface IAdvertiserServices
 	{
 		public void WriteAdvertiser(List<AdvertiserDTO> advertiserDTOs);		
 	}

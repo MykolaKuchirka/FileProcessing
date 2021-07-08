@@ -20,12 +20,6 @@ namespace FileProcessingDB.Services
 			var dataToSave = creditScores.Select(a => new CreditScore { Min = a.Min, Max = a.Max });
 			_database.CreditScores.AddRange(dataToSave);
 			_database.SaveChanges();
-		}
-
-		public void Dispose()
-		{
-			_database.Dispose();
-			GC.SuppressFinalize(this);
-		}
+		}		
 	}
 }

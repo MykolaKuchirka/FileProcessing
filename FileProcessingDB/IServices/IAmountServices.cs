@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FileProcessingDB.IServices
 {
-	public interface IAmountServices: IDisposable
+	public interface IAmountServices
 	{
 		public void WriteAmount(List<AmountDTO> amountDTOs);
 	}

@@ -21,11 +21,5 @@ namespace FileProcessingDB.Services
 			_database.States.AddRange(dataToSave);
 			_database.SaveChanges();
 		}
-
-		public void Dispose()
-		{
-			_database.Dispose();
-			GC.SuppressFinalize(this);
-		}
 	}
 }

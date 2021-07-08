@@ -33,6 +33,7 @@ namespace FileProcessing.API
 				.AddTransient<IAmountServices,AmountServices>()
 				.AddTransient<IBaseRateServices,BaseRateServices>()
 				.AddTransient<ICreditScoreServices, CreditScoreServices>()
+				.AddTransient<IFileServices, FileServices>()
 				.AddTransient<ILtvServices, LtvServices>()
 				.AddTransient<IProductTypeServices, ProductTypeServices>()
 				.AddTransient<IStateServices, StateServices>()
@@ -43,8 +44,8 @@ namespace FileProcessing.API
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
 			IAdvertiserServices advertiserServices, IAmountServices amountServices,
 			IBaseRateServices baseRateServices, ICreditScoreServices creditScoreServices, 
-			ILtvServices ltvServices, IProductTypeServices productTypeServices, IStateServices stateServices, 
-			IFileProcessingParsing fileProcessingParsing)
+			IFileServices fileServices, ILtvServices ltvServices, IProductTypeServices productTypeServices, 
+			IStateServices stateServices, IFileProcessingParsing fileProcessingParsing)
 		{
 
 			if (env.IsDevelopment())

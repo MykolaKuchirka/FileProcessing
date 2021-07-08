@@ -6,9 +6,10 @@ using System.Text;
 
 namespace FileProcessingDB.IServices
 {
-	public interface IBaseRateServices: IDisposable
+	public interface IBaseRateServices
 	{
 		public void WriteBaseRate(List<BaseRateDTO> baseRateDTOs);
-		public IEnumerable<BaseRate> GetAll();		
+		public IEnumerable<BaseRate> GetAll();
+		public int CountCurrEl();
 	}
 }

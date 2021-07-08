@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FileProcessingDB.IServices
 {
-	public interface IProductTypeServices: IDisposable
+	public interface IProductTypeServices
 	{
 		public void WriteProductType(List<ProductTypeDTO> productTypeDTOs);
 	}

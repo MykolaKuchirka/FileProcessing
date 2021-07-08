@@ -13,7 +13,7 @@ namespace FileProcessingDB.Configuration
 		{
 			builder.HasKey(x => x.Id);
 			builder.Property(x => x.Id).UseIdentityColumn();
-			builder.Property(x => x.Min).HasMaxLength(10);
+			builder.Property(x => x.Min).HasMaxLength(10).IsRequired(false);
 			builder.Property(x => x.Max).HasMaxLength(10);
 		}
 	}

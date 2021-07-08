@@ -12,6 +12,7 @@ namespace FileProcessingDB
 		public DbSet<Advertiser> Advertisers { get; }
 		public DbSet<Amount> Amounts { get; }
 		public DbSet<CreditScore> CreditScores { get; }
+		public DbSet<File> Files { get; }
 		public DbSet<Ltv> ltvs { get; }
 		public DbSet<ProductType> ProductTypes { get; }
 		public DbSet<State> States { get; }
