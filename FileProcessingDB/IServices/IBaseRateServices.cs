@@ -8,7 +8,7 @@ namespace FileProcessingDB.IServices
 {
 	public interface IBaseRateServices
 	{
-		public void WriteBaseRate(List<BaseRateDTO> baseRateDTOs);
+		public void AddBaseRate(BaseRate newBaseRate);
 		public IEnumerable<BaseRate> GetAll();
 		public int CountCurrEl();
 	}

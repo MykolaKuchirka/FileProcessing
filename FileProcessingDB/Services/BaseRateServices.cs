@@ -15,13 +15,10 @@ namespace FileProcessingDB.Services
 		public BaseRateServices() =>
 			_database = new FileProcessingDBContext();
 	
-		public void WriteBaseRate(List<BaseRateDTO> baseRates)
-		{	
-			var dataToSave = baseRates.Select(a => new BaseRate { Value = a.Value, TotalTerm = a.TotalTerm, 
-				LastModified = a.LastModified, IDAdv = a.IdAdv, IDAm = a.IdAm, IDCr = a.IdCr, IDL = a.IdL, 
-				IDPr = a.IdPr, IDSt = a.IdSt});
-			_database.BaseRates.AddRange(dataToSave);
-			_database.SaveChanges();
+		public void AddBaseRate(BaseRate newBaseRate)
+		{				
+			_database.BaseRates.Add(newBaseRate);
+			_database.SaveChanges();			
 		}
 		
 		public IEnumerable<BaseRate> GetAll()

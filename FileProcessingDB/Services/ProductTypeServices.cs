@@ -15,10 +15,9 @@ namespace FileProcessingDB.Services
 		public ProductTypeServices() =>
 			_database = new FileProcessingDBContext();
 
-		public void WriteProductType(List<ProductTypeDTO> productTypes)
+		public void AddProductType(ProductType newProductType)
 		{
-			var dataToSave = productTypes.Select(a => new ProductType { Name = a.Name });
-			_database.ProductTypes.AddRange(dataToSave);
+			_database.ProductTypes.Add(newProductType);
 			_database.SaveChanges();			
 		}
 	}

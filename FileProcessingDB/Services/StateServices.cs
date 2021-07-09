@@ -15,10 +15,9 @@ namespace FileProcessingDB.Services
 		public StateServices() =>
 			_database = new FileProcessingDBContext();
 
-		public void WriteState(List<StateDTO> states)
+		public void AddState(State newStates)
 		{
-			var dataToSave = states.Select(a => new State { Name = a.Name });
-			_database.States.AddRange(dataToSave);
+			_database.States.Add(newStates);
 			_database.SaveChanges();
 		}
 	}

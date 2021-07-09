@@ -1,12 +1,9 @@
-﻿using FileProcessingDB.FileProcessingDTO;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FileProcessingDB.DataModel;
 
 namespace FileProcessingDB.IServices
 {
 	public interface ILtvServices
 	{
-		public void WriteLtv(List<LtvDTO> ltvDTOs);
+		public void AddLtv(Ltv newLtv);
 	}
 }
