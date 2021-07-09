@@ -21,5 +21,11 @@ namespace FileProcessingDB.Services
 				_database.Advertisers.AddRange(dataToSave);
 				_database.SaveChanges();
 		}
+
+		public List<Advertiser> GetAdvertiser()
+		{
+			return _database.Advertisers.ToList();
+		}
+
 	}
 }

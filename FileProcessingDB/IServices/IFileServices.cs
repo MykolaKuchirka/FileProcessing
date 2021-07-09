@@ -1,4 +1,5 @@
-﻿using FileProcessingDB.FileProcessingDTO;
+﻿using FileProcessingDB.DataModel;
+using FileProcessingDB.FileProcessingDTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,5 +10,6 @@ namespace FileProcessingDB.IServices
 	{
 		public void WriteFile(List<FileDTO> fileDTOs);
 		public string GetFilePath(int IdAdv);
+		public List<File> GetFiles();
 	}
 }

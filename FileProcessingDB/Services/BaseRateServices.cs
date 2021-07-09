@@ -18,7 +18,7 @@ namespace FileProcessingDB.Services
 		public void WriteBaseRate(List<BaseRateDTO> baseRates)
 		{	
 			var dataToSave = baseRates.Select(a => new BaseRate { Value = a.Value, TotalTerm = a.TotalTerm, 
-				LastModified = a.LastModified, IDAdv = 1, IDAm = a.IdAm, IDCr = a.IdCr, IDL = a.IdL, 
+				LastModified = a.LastModified, IDAdv = a.IdAdv, IDAm = a.IdAm, IDCr = a.IdCr, IDL = a.IdL, 
 				IDPr = a.IdPr, IDSt = a.IdSt});
 			_database.BaseRates.AddRange(dataToSave);
 			_database.SaveChanges();

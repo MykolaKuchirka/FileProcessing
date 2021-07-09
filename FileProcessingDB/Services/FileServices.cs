@@ -42,6 +42,12 @@ namespace FileProcessingDB.Services
 				}
 			}			
 			return Path;
-		}		
+		}
+
+		public List<File> GetFiles()
+		{
+			return _database.Files.ToList();
+		}
+
 	}
 }

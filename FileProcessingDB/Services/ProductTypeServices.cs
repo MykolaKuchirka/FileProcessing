@@ -19,7 +19,7 @@ namespace FileProcessingDB.Services
 		{
 			var dataToSave = productTypes.Select(a => new ProductType { Name = a.Name });
 			_database.ProductTypes.AddRange(dataToSave);
-			_database.SaveChanges();
+			_database.SaveChanges();			
 		}
 	}
 }

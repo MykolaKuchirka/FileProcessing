@@ -8,6 +8,7 @@ using NPOI.XSSF.UserModel;
 using FileProcessingDB.IServices;
 using FileProcessingDB.DataModel;
 using FileProcessingApplication;
+using System.Linq;
 
 namespace FileProcessingApplication
 {
@@ -39,7 +40,6 @@ namespace FileProcessingApplication
 
         public void OpenEXCEL()
         {
-            var Advertiser = new List<AdvertiserDTO>();
             var Amount = new List<AmountDTO>();
             var BaseRate = new List<BaseRateDTO>();
             var CreditScore = new List<CreditScoreDTO>();
@@ -47,7 +47,6 @@ namespace FileProcessingApplication
             var ProductType = new List<ProductTypeDTO>();
             var State = new List<StateDTO>();
 
-            var NewAdvertiser = new AdvertiserDTO();
             var NewAmount = new AmountDTO();
             var NewBaseRate = new BaseRateDTO();
             var NewCreditScore = new CreditScoreDTO();
@@ -68,102 +67,108 @@ namespace FileProcessingApplication
             int TotTermCell = 0;
             int LastModCell = 0;
 
+            var Advertisers = advertiserServices.GetAdvertiser();
+            var Files = fileServices.GetFiles();
+
             Stream templateStream = new MemoryStream();
-            using (var file = new FileStream(fileServices.GetFilePath(1), FileMode.Open, FileAccess.Read))
-            {
-                var Exel = new XSSFWorkbook(file);
-                ISheet sheet = Exel.GetSheetAt(0);                
-                int x = 1; 
-                for(int y = 0; y < sheet.GetRow(0).LastCellNum; y++)
-				{
-                    switch (sheet.GetRow(0).GetCell(y).ToString())
-                    {
-                        case "producttype":
-                            PrTypeCell = y;
-                            break;
-                        case "state":
-                            StCell = y;
-                            break;
-                        case "minltv":
-                            MinLtvCell = y;
-                            break;
-                        case "maxltv":
-                            MaxLtvCell = y;
-                            break;
-                        case "minamount":
-                            MinAmCell = y;
-                            break;
-                        case "maxamount":
-                            MaxAmCell = y;
-                            break;
-                        case "mincreditscore":
-                            MinCrScCell = y;
-                            break;
-                        case "maxcreditscore":
-                            MaxCrScCell = y;
-                            break;
-                        case "baserate":
-                            BRCell = y;
-                            break;
-                        case "totalterm":
-                            TotTermCell = y;
-                            break;
-                        case "lastmodified":
-                            LastModCell = y;
-                            break;
-                        default:
-                            break;
-                    }
-                }               
+            
+                        using (var Doc = new FileStream(fileServices.GetFilePath(2), FileMode.Open, FileAccess.Read))
+                        {
+                            var Exel = new XSSFWorkbook(Doc);
+                            ISheet sheet = Exel.GetSheetAt(0);
+                            int x = 1;
+                            for (int y = 0; y < sheet.GetRow(0).LastCellNum; y++)
+                            {
+                                switch (sheet.GetRow(0).GetCell(y).ToString())
+                                {
+                                    case "producttype":
+                                        PrTypeCell = y;
+                                        break;
+                                    case "state":
+                                        StCell = y;
+                                        break;
+                                    case "minltv":
+                                        MinLtvCell = y;
+                                        break;
+                                    case "maxltv":
+                                        MaxLtvCell = y;
+                                        break;
+                                    case "minamount":
+                                        MinAmCell = y;
+                                        break;
+                                    case "maxamount":
+                                        MaxAmCell = y;
+                                        break;
+                                    case "mincreditscore":
+                                        MinCrScCell = y;
+                                        break;
+                                    case "maxcreditscore":
+                                        MaxCrScCell = y;
+                                        break;
+                                    case "baserate":
+                                        BRCell = y;
+                                        break;
+                                    case "totalterm":
+                                        TotTermCell = y;
+                                        break;
+                                    case "lastmodified":
+                                        LastModCell = y;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
 
-                while (x <= sheet.LastRowNum)
-                {
-                    NewProductType.Name = sheet.GetRow(x).GetCell(PrTypeCell).ToString();                    
-                    ProductType.Add(NewProductType);
-                    NewProductType = new ProductTypeDTO();
+                            while (x <= sheet.LastRowNum)
+                            {
+                                NewProductType.Name = sheet.GetRow(x).GetCell(PrTypeCell).ToString();
+                                ProductType.Add(NewProductType);
+                                NewProductType = new ProductTypeDTO();
 
-                    NewState.Name = sheet.GetRow(x).GetCell(StCell).ToString();
-                    State.Add(NewState);
-                    NewState = new StateDTO();
+                                NewState.Name = sheet.GetRow(x).GetCell(StCell).ToString();
+                                State.Add(NewState);
+                                NewState = new StateDTO();
 
-                    string MinLtv = sheet.GetRow(x).GetCell(MinLtvCell).ToString();
-                    NewLtv.Min = float.Parse(MinLtv, CultureInfo.InvariantCulture.NumberFormat);
-                    string MaxLtv = sheet.GetRow(x).GetCell(MaxLtvCell).ToString();
-                    NewLtv.Max = float.Parse(MaxLtv, CultureInfo.InvariantCulture.NumberFormat);
-                    Ltv.Add(NewLtv);
-                    NewLtv = new LtvDTO();
+                                string MinLtv = sheet.GetRow(x).GetCell(MinLtvCell).ToString();
+                                NewLtv.Min = float.Parse(MinLtv, CultureInfo.InvariantCulture.NumberFormat);
+                                string MaxLtv = sheet.GetRow(x).GetCell(MaxLtvCell).ToString();
+                                NewLtv.Max = float.Parse(MaxLtv, CultureInfo.InvariantCulture.NumberFormat);
+                                Ltv.Add(NewLtv);
+                                NewLtv = new LtvDTO();
 
-                    string MinAmount = sheet.GetRow(x).GetCell(MinAmCell).ToString();
-                    NewAmount.Min = float.Parse(MinAmount, CultureInfo.InvariantCulture.NumberFormat);
-                    string MaxAmount = sheet.GetRow(x).GetCell(MaxAmCell).ToString();
-                    NewAmount.Max = float.Parse(MaxAmount, CultureInfo.InvariantCulture.NumberFormat);
-                    Amount.Add(NewAmount);
-                    NewAmount = new AmountDTO();
+                                string MinAmount = sheet.GetRow(x).GetCell(MinAmCell).ToString();
+                                NewAmount.Min = float.Parse(MinAmount, CultureInfo.InvariantCulture.NumberFormat);
+                                string MaxAmount = sheet.GetRow(x).GetCell(MaxAmCell).ToString();
+                                NewAmount.Max = float.Parse(MaxAmount, CultureInfo.InvariantCulture.NumberFormat);
+                                Amount.Add(NewAmount);
+                                NewAmount = new AmountDTO();
 
-                    string MinCreditScore = ParsingEmptyCells.GetCellValue(sheet.GetRow(x), MinCrScCell).ToString();
-                    NewCreditScore.Min = Convert.ToInt32(MinCreditScore);
-                    string MaxCreditScore = sheet.GetRow(x).GetCell(MaxCrScCell).ToString();
-                    NewCreditScore.Max = Convert.ToInt32(MaxCreditScore);
-                    CreditScore.Add(NewCreditScore);
-                    NewCreditScore = new CreditScoreDTO();
+                                string MinCreditScore = ParsingEmptyCells.GetCellValue(sheet.GetRow(x), MinCrScCell).ToString();
+                                NewCreditScore.Min = Convert.ToInt32(MinCreditScore);
+                                string MaxCreditScore = sheet.GetRow(x).GetCell(MaxCrScCell).ToString();
+                                NewCreditScore.Max = Convert.ToInt32(MaxCreditScore);
+                                CreditScore.Add(NewCreditScore);
+                                NewCreditScore = new CreditScoreDTO();
 
-                    string BaseRateValue = sheet.GetRow(x).GetCell(BRCell).ToString();
-                    NewBaseRate.Value = float.Parse(BaseRateValue, CultureInfo.InvariantCulture.NumberFormat);
-                    string TotalTerm = sheet.GetRow(x).GetCell(TotTermCell).ToString();
-                    NewBaseRate.TotalTerm = Convert.ToInt32(TotalTerm);
-                    string LastModified = sheet.GetRow(x).GetCell(LastModCell).ToString();
-                    NewBaseRate.LastModified = Convert.ToDateTime(LastModified);
-                    NewBaseRate.IdAdv = 1;
-                    NewBaseRate.IdAm = x + CurrEl;
-                    NewBaseRate.IdCr = x + CurrEl;
-                    NewBaseRate.IdL = x + CurrEl;
-                    NewBaseRate.IdPr = x + CurrEl;
-                    NewBaseRate.IdSt = x + CurrEl;
-                    BaseRate.Add(NewBaseRate);
-                    NewBaseRate = new BaseRateDTO();                                      
-                    x++;
-                }
-            }
+                                string BaseRateValue = sheet.GetRow(x).GetCell(BRCell).ToString();
+                                NewBaseRate.Value = float.Parse(BaseRateValue, CultureInfo.InvariantCulture.NumberFormat);
+                                string TotalTerm = sheet.GetRow(x).GetCell(TotTermCell).ToString();
+                                NewBaseRate.TotalTerm = Convert.ToInt32(TotalTerm);
+                                string LastModified = sheet.GetRow(x).GetCell(LastModCell).ToString();
+                                NewBaseRate.LastModified = Convert.ToDateTime(LastModified);
+                                NewBaseRate.IdAdv = 2;
+                                NewBaseRate.IdAm = CurrEl+BaseRate.Count()+1;
+                                NewBaseRate.IdCr =CurrEl+BaseRate.Count()+1;
+                                NewBaseRate.IdL = CurrEl+BaseRate.Count()+1;
+                                NewBaseRate.IdPr = CurrEl+BaseRate.Count()+1;
+                                NewBaseRate.IdSt = CurrEl+BaseRate.Count()+1;
+                                BaseRate.Add(NewBaseRate);
+                                NewBaseRate = new BaseRateDTO();
+                                x++;                                
+                            }
+                        }
+                   
+            
             templateStream.Close();
 
             amountServices.WriteAmount(Amount);
@@ -172,14 +177,6 @@ namespace FileProcessingApplication
             productTypeServices.WriteProductType(ProductType);
             stateServices.WriteState(State);
             baseRateServices.WriteBaseRate(BaseRate);
-
-            amountServices.Dispose();
-            creditScoreServices.Dispose();
-            fileServices.Dispose();
-            ltvServices.Dispose();
-            productTypeServices.Dispose();
-            stateServices.Dispose();
-            baseRateServices.Dispose();
         }
 
         public IEnumerable<BaseRate> Getall()
