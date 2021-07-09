@@ -8,7 +8,7 @@ namespace FileProcessingDB.IServices
 {
 	public interface IFileServices
 	{
-		public void WriteFile(List<FileDTO> fileDTOs);
+		public void AddFile(File newFile);
 		public string GetFilePath(int IdAdv);
 		public List<File> GetFiles();
 	}

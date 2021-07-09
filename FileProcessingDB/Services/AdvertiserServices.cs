@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FileProcessingDB.DataModel;
-using FileProcessingDB.FileProcessingDTO;
 using FileProcessingDB.IServices;
 
 namespace FileProcessingDB.Services
@@ -15,14 +12,13 @@ namespace FileProcessingDB.Services
 		public AdvertiserServices()	 =>
 			_database = new FileProcessingDBContext();	
 
-		public void WriteAdvertiser(List<AdvertiserDTO> advertisers)
+		public void AddAdvertiser(Advertiser newAdvertiser)
 		{				
-				var dataToSave = advertisers.Select(a => new Advertiser { Name = a.Name });
-				_database.Advertisers.AddRange(dataToSave);
-				_database.SaveChanges();
+			_database.Advertisers.Add(newAdvertiser);
+			_database.SaveChanges();
 		}
 
-		public List<Advertiser> GetAdvertiser()
+		public List<Advertiser> GetAdvertisers()
 		{
 			return _database.Advertisers.ToList();
 		}

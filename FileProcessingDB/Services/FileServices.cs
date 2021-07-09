@@ -15,18 +15,10 @@ namespace FileProcessingDB.Services
 		public FileServices() =>
 			_database = new FileProcessingDBContext();
 
-		public void WriteFile(List<FileDTO> files)
+		public void AddFile(File newFile)
 		{
-			var Advertiser = _database.Advertisers.ToList();
-			var CountAdv = Advertiser.Count();
-			
-			var dataToSave = files.Select(a => new File
-			{
-				FilePath = a.FilePath,				
-				IDAdv = a.IDAdv,
-				
-			});
-			_database.Files.AddRange(dataToSave);
+			var NewFile = new File { FilePath = newFile.FilePath, IDAdv = Convert.ToInt32(newFile.IDAdv.ToString()) };
+			_database.Files.Add(NewFile);
 			_database.SaveChanges();
 		}
 

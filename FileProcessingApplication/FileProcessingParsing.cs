@@ -40,7 +40,7 @@ namespace FileProcessingApplication
 
         public void OpenEXCEL()
         {
-            var Advertisers = advertiserServices.GetAdvertiser();
+            var Advertisers = advertiserServices.GetAdvertisers();
             var Files = fileServices.GetFiles();
 
             Stream templateStream = new MemoryStream();
