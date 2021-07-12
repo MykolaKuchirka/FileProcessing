@@ -1,12 +1,9 @@
-﻿using FileProcessingDB.FileProcessingDTO;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FileProcessingDB.DataModel;
 
 namespace FileProcessingDB.IServices
 {
-	public interface IStateServices: IDisposable
+	public interface IStateServices
 	{
-		public void WriteState(List<StateDTO> stateDTOs);
+		public void AddState(State newState);
 	}
 }

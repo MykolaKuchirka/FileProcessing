@@ -15,17 +15,10 @@ namespace FileProcessingDB.Services
 		public CreditScoreServices() =>
 			_database = new FileProcessingDBContext();
 
-		public void WriteCreditScore(List<CreditScoreDTO> creditScores)
+		public void AddCreditScore(CreditScore newCreditScore)
 		{
-			var dataToSave = creditScores.Select(a => new CreditScore { Min = a.Min, Max = a.Max });
-			_database.CreditScores.AddRange(dataToSave);
+			_database.CreditScores.Add(newCreditScore);
 			_database.SaveChanges();
-		}
-
-		public void Dispose()
-		{
-			_database.Dispose();
-			GC.SuppressFinalize(this);
-		}
+		}		
 	}
 }

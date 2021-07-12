@@ -15,17 +15,10 @@ namespace FileProcessingDB.Services
 		public AmountServices() =>
 			_database = new FileProcessingDBContext();
 
-		public void WriteAmount(List<AmountDTO> amounts)
-		{
-			var dataToSave = amounts.Select(a => new Amount { Min = a.Min, Max = a.Max });
-			_database.Amounts.AddRange(dataToSave);
+		public void AddAmount(Amount newAmount)
+		{			
+			_database.Amounts.Add(newAmount);
 			_database.SaveChanges();
-		}
-
-		public void Dispose()
-		{
-			_database.Dispose();
-			GC.SuppressFinalize(this);
 		}
 	}
 }

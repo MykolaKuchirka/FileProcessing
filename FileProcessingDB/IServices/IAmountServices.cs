@@ -1,12 +1,10 @@
-﻿using FileProcessingDB.FileProcessingDTO;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FileProcessingDB.DataModel;
+
 
 namespace FileProcessingDB.IServices
 {
-	public interface IAmountServices: IDisposable
+	public interface IAmountServices
 	{
-		public void WriteAmount(List<AmountDTO> amountDTOs);
+		public void AddAmount(Amount newAmount);
 	}
 }

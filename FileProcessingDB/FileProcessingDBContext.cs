@@ -18,9 +18,11 @@ namespace FileProcessingDB.DataModel
 		public DbSet<Advertiser> Advertisers { get; set; }
 		public DbSet<Amount> Amounts { get; set; }
 		public DbSet<CreditScore> CreditScores { get; set; }
+		public DbSet<File> Files { get; set; }
 		public DbSet<Ltv> ltvs { get; set; }
 		public DbSet<ProductType> ProductTypes { get; set; }
 		public DbSet<State> States { get; set; }
+		
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -33,6 +35,7 @@ namespace FileProcessingDB.DataModel
 			modelBuilder.ApplyConfiguration(new AmountConfiguration());
 			modelBuilder.ApplyConfiguration(new BaseRateConfiguration());
 			modelBuilder.ApplyConfiguration(new CreditScoreConfiguration());
+			modelBuilder.ApplyConfiguration(new FileConfiguration());
 			modelBuilder.ApplyConfiguration(new LtvConfiguration());
 			modelBuilder.ApplyConfiguration(new ProductTypeConfiguration());
 			modelBuilder.ApplyConfiguration(new StateConfiguration());

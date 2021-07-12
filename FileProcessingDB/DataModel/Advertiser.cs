@@ -10,5 +10,6 @@ namespace FileProcessingDB.DataModel
 		public string Name { get; set; }		
 
 		public virtual List<BaseRate> Baserates { get; set; }
+		public virtual List<File> Files { get; set; }
 	}
 }

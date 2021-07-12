@@ -6,10 +6,10 @@ using System.Text;
 
 namespace FileProcessingDB.IServices
 {
-	public interface IBaseRateServices
+	public interface IFileServices
 	{
-		public void AddBaseRate(BaseRate newBaseRate);
-		public IEnumerable<BaseRate> GetAll();
-		public int CountCurrEl();
+		public int AddFile(File newFile);
+		public string GetFilePath(int IdAdv);
+		public List<File> GetFiles();
 	}
 }

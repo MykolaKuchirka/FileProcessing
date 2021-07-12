@@ -15,17 +15,10 @@ namespace FileProcessingDB.Services
 		public LtvServices() =>
 			_database = new FileProcessingDBContext();
 
-		public void WriteLtv(List<LtvDTO> ltvs)
-		{
-			var dataToSave = ltvs.Select(a => new Ltv { Min = a.Min, Max = a.Max });
-			_database.ltvs.AddRange(dataToSave);
+		public void AddLtv(Ltv newLtv)
+		{			
+			_database.ltvs.Add(newLtv);
 			_database.SaveChanges();
-		}
-
-		public void Dispose()
-		{
-			_database.Dispose();
-			GC.SuppressFinalize(this);
 		}
 	}
 }

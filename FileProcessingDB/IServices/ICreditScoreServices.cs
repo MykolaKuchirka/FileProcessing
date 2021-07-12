@@ -1,12 +1,9 @@
-﻿using FileProcessingDB.FileProcessingDTO;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FileProcessingDB.DataModel;
 
 namespace FileProcessingDB.IServices
 {
-	public interface ICreditScoreServices: IDisposable
+	public interface ICreditScoreServices
 	{
-		public void WriteCreditScore(List<CreditScoreDTO> creditScoreDTOs);
+		public void AddCreditScore(CreditScore newCreditScore);
 	}
 }

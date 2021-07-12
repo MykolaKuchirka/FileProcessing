@@ -1,12 +1,15 @@
-﻿using FileProcessingDB.FileProcessingDTO;
+﻿using FileProcessingDB.DataModel;
+using FileProcessingDB.FileProcessingDTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace FileProcessingDB.IServices
 {
-	public interface IAdvertiserServices: IDisposable
+	public interface IAdvertiserServices
 	{
-		public void WriteAdvertiser(List<AdvertiserDTO> advertiserDTOs);		
+		public int AddAdvertiser(Advertiser newAdvertiser);
+		public List<Advertiser> GetAdvertisers();
+
 	}
 }

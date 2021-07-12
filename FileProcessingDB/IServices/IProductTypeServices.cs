@@ -1,12 +1,9 @@
-﻿using FileProcessingDB.FileProcessingDTO;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FileProcessingDB.DataModel;
 
 namespace FileProcessingDB.IServices
 {
-	public interface IProductTypeServices: IDisposable
+	public interface IProductTypeServices
 	{
-		public void WriteProductType(List<ProductTypeDTO> productTypeDTOs);
+		public void AddProductType(ProductType newProductType);
 	}
 }
