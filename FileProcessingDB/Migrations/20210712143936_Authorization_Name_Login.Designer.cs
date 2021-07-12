@@ -4,14 +4,16 @@ using FileProcessingDB.DataModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FileProcessingDB.Migrations
 {
     [DbContext(typeof(FileProcessingDBContext))]
-    partial class FileProcessingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210712143936_Authorization_Name_Login")]
+    partial class Authorization_Name_Login
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

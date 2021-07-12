@@ -22,6 +22,7 @@ namespace FileProcessingDB.DataModel
 		public DbSet<Ltv> ltvs { get; set; }
 		public DbSet<ProductType> ProductTypes { get; set; }
 		public DbSet<State> States { get; set; }
+		public DbSet<User> Users { get; set; }
 		
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -39,6 +40,7 @@ namespace FileProcessingDB.DataModel
 			modelBuilder.ApplyConfiguration(new LtvConfiguration());
 			modelBuilder.ApplyConfiguration(new ProductTypeConfiguration());
 			modelBuilder.ApplyConfiguration(new StateConfiguration());
+			modelBuilder.ApplyConfiguration(new UserConfiguration());
 		}
 	}
 }
