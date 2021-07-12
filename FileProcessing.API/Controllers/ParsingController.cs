@@ -38,17 +38,15 @@ namespace FileProcessing.API.Controllers
 		[HttpPost("/AddAdvertiser")]
 		public IActionResult AddAdvertiser([FromBody] Advertiser newAdvertiser)
 		{
-			advertiserServices.AddAdvertiser(newAdvertiser);
-			var Advertisers = advertiserServices.GetAdvertisers();
-			return Ok(Advertisers.Count());
+			var LastId = advertiserServices.AddAdvertiser(newAdvertiser);
+			return Ok(LastId);
 		}
 
 		[HttpPost("/AddFile")]
 		public IActionResult AddAFile([FromBody] File newFile)
 		{
-			fileServices.AddFile(newFile);
-			var Files = fileServices.GetFiles();
-			return Ok(Files.Count());
+			var LastId = fileServices.AddFile(newFile);
+			return Ok(LastId);
 		}
 	}
 }

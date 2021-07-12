@@ -8,7 +8,7 @@ namespace FileProcessingDB.IServices
 {
 	public interface IFileServices
 	{
-		public void AddFile(File newFile);
+		public int AddFile(File newFile);
 		public string GetFilePath(int IdAdv);
 		public List<File> GetFiles();
 	}

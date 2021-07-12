@@ -8,7 +8,7 @@ namespace FileProcessingDB.IServices
 {
 	public interface IAdvertiserServices
 	{
-		public void AddAdvertiser(Advertiser newAdvertiser);
+		public int AddAdvertiser(Advertiser newAdvertiser);
 		public List<Advertiser> GetAdvertisers();
 
 	}

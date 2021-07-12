@@ -12,10 +12,11 @@ namespace FileProcessingDB.Services
 		public AdvertiserServices()	 =>
 			_database = new FileProcessingDBContext();	
 
-		public void AddAdvertiser(Advertiser newAdvertiser)
+		public int AddAdvertiser(Advertiser newAdvertiser)
 		{				
 			_database.Advertisers.Add(newAdvertiser);
-			_database.SaveChanges();
+			_database.SaveChanges();			
+			return newAdvertiser.Id;
 		}
 
 		public List<Advertiser> GetAdvertisers()

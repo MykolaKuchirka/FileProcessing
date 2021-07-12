@@ -15,25 +15,18 @@ namespace FileProcessingDB.Services
 		public FileServices() =>
 			_database = new FileProcessingDBContext();
 
-		public void AddFile(File newFile)
+		public int AddFile(File newFile)
 		{
-			var NewFile = new File { FilePath = newFile.FilePath, IDAdv = Convert.ToInt32(newFile.IDAdv.ToString()) };
+			var NewFile = new File { FilePath = newFile.FilePath, IDAdv = newFile.IDAdv };
 			_database.Files.Add(NewFile);
 			_database.SaveChanges();
+			return NewFile.Id;
 		}
 
 		public string GetFilePath(int IdAdv)
 		{
-			var files = _database.Files.ToList();
-			string Path = "";
-			foreach(File file in files)
-			{
-				if (IdAdv == file.IDAdv)
-				{					
-					Path = file.FilePath;
-				}
-			}			
-			return Path;
+			var retValue = _database.Files.FirstOrDefault(f => f.IDAdv == IdAdv)?.FilePath ?? string.Empty;		
+			return retValue;
 		}
 
 		public List<File> GetFiles()
